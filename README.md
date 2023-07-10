@@ -52,9 +52,11 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+        working-directory: ${{ matrix.project }}
 
       - name: Build the project
-        run: npm run build
+        run: npm run build --if-present
+        working-directory: ${{ matrix.project }}
 
       - name: Check and validate ${{ matrix.project }}'s package.json
         uses: boyum/attw-action@v1
