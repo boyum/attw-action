@@ -1,5 +1,10 @@
 name: Are The Types Wrong checker
 description: Action that runs and validates npm packages with Are The Types Wrong (attw)
+author: boyum
+
+branding:
+  icon: package
+  color: yellow
 
 inputs:
   working-directory:
