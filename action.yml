@@ -18,4 +18,4 @@ runs:
   steps:
     - name: Check if the Types Are Wrong
       shell: bash
-      run: npx attw --pack ${{ inputs.working-directory }}
+      run: npx -p @arethetypeswrong/cli attw --pack ${{ inputs.working-directory }}
