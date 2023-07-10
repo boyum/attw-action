@@ -1,0 +1,10 @@
+name: Are The Types Wrong checker
+description: Action that runs and validates npm packages with Are The Types Wrong (attw)
+
+runs:
+  using: composite
+
+  steps:
+    - name: Check if the Types Are Wrong
+      shell: bash
+      run: npx attw --pack .
