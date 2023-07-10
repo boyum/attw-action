@@ -20,9 +20,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clone the repository
-        uses: actions/checkout@v3
-
       - name: Check and validate package.json
         uses: boyum/attw-action@v1
 ```
@@ -47,9 +44,6 @@ jobs:
           - projects/c/d
 
     steps:
-      - name: Clone the repository
-        uses: actions/checkout@v3
-
       - name: Check and validate ${{ matrix.project }}'s package.json
         uses: boyum/attw-action@v1
         with:
@@ -58,6 +52,6 @@ jobs:
 
 ### Options
 
-| Name | Required | Default value | Description |
-|---|---|---|---|
-| `working-directory` | false  | `.` | The directory where package.json is located, relative to the Git project. |
+| Name                | Required | Default value | Description                                                               |
+| ------------------- | -------- | ------------- | ------------------------------------------------------------------------- |
+| `working-directory` | false    | `.`           | The directory where package.json is located, relative to the Git project. |

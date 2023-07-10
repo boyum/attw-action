@@ -16,6 +16,14 @@ runs:
   using: composite
 
   steps:
+    - name: Clone the repository
+      uses: actions/checkout@v3
+
+    - name: Install Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 20
+
     - name: Check if the Types Are Wrong
       shell: bash
       run: npx -p @arethetypeswrong/cli attw --pack ${{ inputs.working-directory }}
