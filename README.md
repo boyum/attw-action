@@ -5,6 +5,10 @@ It will run `attw --pack .` under the hood to pack the npm package, validate it,
 
 ## Usage
 
+### Examples
+
+#### Check current project in a single repo
+
 ```yml
 name: Check and validate package.json
 
@@ -21,8 +25,35 @@ jobs:
 
       - name: Check and validate package.json
         uses: boyum/attw-action@v1
+```
+
+#### Check multiple projects in a monorepo
+
+```yml
+name: Check and validate package.json
+
+on:
+  - pull_request
+
+jobs:
+  check-package:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        project:
+          - projects/a
+          - b
+          - projects/c/d
+
+    steps:
+      - name: Clone the repository
+        uses: actions/checkout@v3
+
+      - name: Check and validate ${{ matrix.project }}'s package.json
+        uses: boyum/attw-action@v1
         with:
-          working-directory: . # This is the default working directory and can be omitted
+          working-directory: ${{ matrix.project }}
 ```
 
 ### Options
