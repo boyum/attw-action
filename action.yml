@@ -12,6 +12,11 @@ inputs:
     description: The working directory to run the command in
     default: "."
 
+  block-esm:
+    required: false
+    description: Whether to fail if the package is an ESM package
+    default: "false"
+
 runs:
   using: composite
 
@@ -23,4 +28,4 @@ runs:
 
     - name: Check if the Types Are Wrong
       shell: bash
-      run: npx -p @arethetypeswrong/cli attw --pack ${{ inputs.working-directory }}
+      run: npx -p @arethetypeswrong/cli attw --pack ${{ inputs.working-directory }} ${{ inputs.block-esm != 'true' && '--ignore-rules cjs-resolves-to-esm' || '' }}
