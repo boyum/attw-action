@@ -1,7 +1,7 @@
 # Are The Types Wrong checker
 
 This action runs and validates npm packages with [Are The Types Wrong (attw)](https://arethetypeswrong.github.io/).
-It will run `attw --pack <directory>` under the hood to pack the npm package, validate it, then clean up afterwards.
+It will run `attw --pack <directory> --ignore-rules 'cjs-resolves-to-esm'` under the hood to pack the npm package, validate it, then clean up afterwards.
 
 ## Usage
 
@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check and validate package.json
-        uses: boyum/attw-action@v1
+        uses: boyum/attw-action@v1.1
 ```
 
 #### Check multiple projects in a monorepo
@@ -48,24 +48,42 @@ jobs:
 
     steps:
       - name: Clone the repository
-        uses: actions/checkout@v3
-
-      - name: Install dependencies
-        run: npm ci
-        working-directory: ${{ matrix.project }}
-
-      - name: Build the project
-        run: npm run build --if-present
-        working-directory: ${{ matrix.project }}
+        uses: actions/checkout@v4
 
       - name: Check and validate ${{ matrix.project }}'s package.json
-        uses: boyum/attw-action@v1
+        uses: boyum/attw-action@v1.1
         with:
           working-directory: ${{ matrix.project }}
 ```
 
+#### Only allow CommonJS packages
+
+To fail if the package.json contains `"type": "module"`, use the `block-esm` option.
+This will make sure your module can be imported to CommonJS projects without the use of dynamic `import()`.
+
+```yml
+name: Check and validate package.json
+
+on:
+  - pull_request
+
+jobs:
+  check-package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone the repository
+        uses: actions/checkout@v4
+
+      - name: Check and validate package.json
+        uses: boyum/attw-action@v1.1
+        with:
+          block-esm: true
+```
+
 ### Options
 
-| Name                | Required | Default value | Description                                                               |
-| ------------------- | -------- | ------------- | ------------------------------------------------------------------------- |
-| `working-directory` | false    | `.`           | The directory where package.json is located, relative to the Git project. |
+| Name                | Required | Default value | Description                                                                                                                    |
+| ------------------- | -------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `working-directory` | false    | `.`           | The directory where package.json is located, relative to the Git project.                                                      |
+| `block-esm`         | false    | `false`       | Fail if the package.json contains `"type": "module"`. This turns off `--ignore-rules 'cjs-resolves-to-esm'` behind the scenes. |
