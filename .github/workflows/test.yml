@@ -11,7 +11,12 @@ jobs:
       - name: Clone the repository
         uses: actions/checkout@v4
 
-      - name: Test
+      - name: Test CommonJS
         uses: ./
         with:
-          working-directory: test-assets
+          working-directory: fixtures/commonjs
+
+      - name: Test ESModule
+        uses: ./
+        with:
+          working-directory: fixtures/esmodule
