@@ -1,0 +1,17 @@
+{
+  "name": "hello-world",
+  "version": "1.0.0",
+  "type": "module",
+  "export": {
+    "./": {
+      "import": {
+        "default": "./index.js",
+        "types": "./index.d.ts"
+      },
+      "require": {
+        "default": "./index.cjs",
+        "types": "./index.d.ts"
+      }
+    }
+  }
+}

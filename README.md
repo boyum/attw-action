@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - name: Clone the repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Check and validate package.json
         uses: boyum/attw-action@v1
