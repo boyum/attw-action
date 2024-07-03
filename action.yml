@@ -28,10 +28,4 @@ runs:
 
     - name: Check if the Types Are Wrong
       shell: bash
-      run: |
-        # Change directory to inputs.working-directory if it is set
-        if [ -n "${{ inputs.working-directory }}" ]; then
-          cd ${{ inputs.working-directory }}
-        fi
-
-        npx -p @arethetypeswrong/cli@0.16 attw --pack ${{ inputs.block-esm != 'true' && '--ignore-rules cjs-resolves-to-esm' || '' }}
+      run: npx -p @arethetypeswrong/cli@0.15 attw --pack ${{ inputs.working-directory }} ${{ inputs.block-esm != 'true' && '--ignore-rules cjs-resolves-to-esm' || '' }}
