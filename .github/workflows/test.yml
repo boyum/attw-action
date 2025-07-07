@@ -15,8 +15,22 @@ jobs:
         uses: ./
         with:
           working-directory: fixtures/commonjs
+          block-esm: false
 
       - name: Test ESModule
         uses: ./
         with:
           working-directory: fixtures/esmodule
+          block-esm: false
+
+      - name: Test CommonJS
+        uses: ./
+        with:
+          working-directory: fixtures/commonjs
+          block-esm: true
+
+      - name: Test ESModule
+        uses: ./
+        with:
+          working-directory: fixtures/esmodule
+          block-esm: true
