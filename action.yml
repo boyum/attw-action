@@ -28,4 +28,4 @@ runs:
 
     - name: Check if the Types Are Wrong
       shell: bash
-      run: npx -p @arethetypeswrong/cli@0.15 attw --pack ${{ inputs.working-directory }} ${{ inputs.block-esm != 'true' && '--ignore-rules cjs-resolves-to-esm' || '' }}
+      run: npx -p @arethetypeswrong/cli@0.18 attw --pack ${{ inputs.working-directory }} ${{ inputs.block-esm != 'true' && '--ignore-rules cjs-resolves-to-esm' || '' }}
