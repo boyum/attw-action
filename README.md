@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check and validate package.json
-        uses: boyum/attw-action@v1.1
+        uses: boyum/attw-action@v1
 ```
 
 #### Check multiple projects in a monorepo
@@ -51,7 +51,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check and validate ${{ matrix.project }}'s package.json
-        uses: boyum/attw-action@v1.1
+        uses: boyum/attw-action@v1
         with:
           working-directory: ${{ matrix.project }}
 ```
@@ -76,7 +76,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check and validate package.json
-        uses: boyum/attw-action@v1.1
+        uses: boyum/attw-action@v1
         with:
           block-esm: true
 ```
@@ -87,3 +87,15 @@ jobs:
 | ------------------- | -------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | `working-directory` | false    | `.`           | The directory where package.json is located, relative to the Git project.                                                      |
 | `block-esm`         | false    | `false`       | Fail if the package.json contains `"type": "module"`. This turns off `--ignore-rules 'cjs-resolves-to-esm'` behind the scenes. |
+
+## Development
+
+### Releasing
+
+To release a new version, create a new release in GitHub's Releases tab.
+Also, overwrite the main version tag (currently v1) to point to the new release:
+
+```bash
+git tag -f v1
+git push -f origin v1
+```
