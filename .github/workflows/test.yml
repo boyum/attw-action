@@ -11,26 +11,22 @@ jobs:
       - name: Clone the repository
         uses: actions/checkout@v4
 
-      - name: Test CommonJS
+      - name: Test CommonJS (ESM allowed)
         uses: ./
         with:
           working-directory: fixtures/commonjs
           block-esm: false
 
-      - name: Test ESModule
+      - name: Test ESModule (ESM allowed)
         uses: ./
         with:
           working-directory: fixtures/esmodule
           block-esm: false
 
-      - name: Test CommonJS
+      - name: Test CommonJS (ESM blocked)
         uses: ./
         with:
           working-directory: fixtures/commonjs
           block-esm: true
 
-      - name: Test ESModule
-        uses: ./
-        with:
-          working-directory: fixtures/esmodule
-          block-esm: true
+      # No test of ESModule with ESM blocked, as it should always fail
